@@ -2,6 +2,7 @@
 // This file is to be applied to every subproject.
 //
 
+apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'maven'
 
