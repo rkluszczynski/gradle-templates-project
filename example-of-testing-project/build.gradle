@@ -14,6 +14,9 @@ if (!hasProperty('mainClass')) {
 }
 
 dependencies {
+    // Mockito testing framework (http://code.google.com/p/mockito/):
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '1.9.5'
+    // Spock testing framework (http://code.google.com/p/spock/):
     testCompile group: 'org.spockframework', name: 'spock-core', version: '0.7-groovy-2.0'
     
     // TODO: Add dependencies here

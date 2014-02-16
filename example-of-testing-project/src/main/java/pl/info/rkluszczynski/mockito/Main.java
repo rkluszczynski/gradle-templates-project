@@ -1,4 +1,4 @@
-package pl.info.rkluszczynski;
+package pl.info.rkluszczynski.mockito;
 
 public class Main {
     
