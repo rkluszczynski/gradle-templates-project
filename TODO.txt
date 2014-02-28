@@ -1,0 +1,11 @@
+
+
+    TODO Templates Projects:
+        - simple jetty
+        - gson
+        - handlebars jetty
+        - tymianek
+        - aspectj
+        - dao z mongo
+
+

@@ -1,4 +1,4 @@
 /.gradle/
+/.idea/
 /.nb-gradle/profiles/private/
-/example-of-spock-project/build/
 /example-of-testing-project/build/
