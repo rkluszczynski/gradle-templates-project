@@ -1,4 +1,6 @@
 /.gradle/
 /.idea/
 /.nb-gradle/profiles/private/
+/*.iml
 /example-of-testing-project/build/
+/example-of-jetty-project/build/
