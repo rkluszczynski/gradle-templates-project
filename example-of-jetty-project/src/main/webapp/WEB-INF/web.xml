@@ -5,12 +5,12 @@
 
     <servlet>
         <display-name>HelloServlet</display-name>
-        <servlet-name>HelloServlet</servlet-name>
+        <servlet-name>helloServlet</servlet-name>
         <servlet-class>pl.info.rkluszczynski.servlet.HelloServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
+        <servlet-name>helloServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
