@@ -3,4 +3,6 @@
 /.nb-gradle/profiles/private/
 /*.iml
 /example-of-testing-project/build/
+/example-of-testing-project/*.iml
 /example-of-jetty-project/build/
+/example-of-jetty-project/*.iml

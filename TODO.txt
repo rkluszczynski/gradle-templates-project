@@ -1,7 +1,6 @@
 
 
     TODO Templates Projects:
-        - simple jetty
         - gson
         - handlebars jetty
         - tymianek
