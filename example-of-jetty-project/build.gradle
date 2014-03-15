@@ -7,6 +7,6 @@ dependencies {
 
 jettyRun {
     httpPort = 8080
-    stopPort = null
+    stopPort = 8090
     stopKey = null
 }

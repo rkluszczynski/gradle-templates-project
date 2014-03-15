@@ -9,7 +9,7 @@ apply plugin: 'maven'
 String mavenGroupId = 'pl.info.rkluszczynski'
 String mavenVersion = '1.0-SNAPSHOT'
 
-sourceCompatibility = '1.8'
+sourceCompatibility = '1.7'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 repositories {
@@ -21,7 +21,7 @@ repositories {
 
 dependencies {
     // Adding dependencies here will add the dependencies to each subproject.
-    testCompile group: 'junit', name: 'junit', version: '4.10'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
 String mavenArtifactId = name
