@@ -14,6 +14,10 @@ import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondit
 import pl.info.rkluszczynski.examples.upload.model.UploadedFile;
 import pl.info.rkluszczynski.examples.upload.validator.FileValidator;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
 import java.io.*;
 
 @Controller
@@ -38,7 +42,8 @@ public class UploadController {
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	public ModelAndView fileUploaded(
 			@ModelAttribute("uploadedFile") UploadedFile uploadedFile,
-			BindingResult result)
+			BindingResult result,
+            HttpSession session)
     {
         logger.info("Executed POST /fileUpload");
 
@@ -50,32 +55,29 @@ public class UploadController {
 
         String fileName = file.getOriginalFilename();
         try {
-            InputStream inputStream = null;
-            OutputStream outputStream = null;
-            try {
-                inputStream = file.getInputStream();
-
-                File newFile = new File("/tmp/" + fileName);
-                logger.info("Saving file as: " + newFile.getAbsolutePath());
-                if (!newFile.exists()) {
-                    newFile.createNewFile();
-                }
-                outputStream = new FileOutputStream(newFile);
-                int read = 0;
-                byte[] bytes = new byte[1024];
-                while ((read = inputStream.read(bytes)) != -1) {
-                    outputStream.write(bytes, 0, read);
-                }
-            }
-            finally {
-                if (inputStream != null)
-                    inputStream.close();
-                if (outputStream != null)
-                    outputStream.close();
-            }
+                BufferedImage imgBuff = ImageIO.read(file.getInputStream());
+                logger.info("Successfully read image: " + fileName);
+                session.setAttribute("uploadedImage", imgBuff);
 		} catch (IOException e) {
-            logger.warn("Problem saving the file: " + fileName, e);
+            logger.warn("Problem reading image: " + fileName + ". Is it really image?", e);
 		}
 		return new ModelAndView("showFile", "message", fileName);
 	}
+
+
+    @RequestMapping(value = "/uploadedContent", method = RequestMethod.GET)
+    public ModelAndView streamUploadedContent(
+            HttpServletResponse response,
+            HttpSession session)
+    {
+        if (session.getAttribute("uploadedImage") != null) {
+            BufferedImage imgBuff = (BufferedImage) session.getAttribute("uploadedImage");
+            try {
+                ImageIO.write(imgBuff, "PNG", response.getOutputStream());
+            } catch (IOException e) {
+                logger.warn("Problem with streaming image!", e);
+            }
+        }
+        return null;
+    }
 }

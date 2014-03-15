@@ -5,10 +5,10 @@
 
 <body>
 	<center>
-		<h2>Upload status</h2>
 		<h3>
 			File name : "<strong>${message}</strong>" uploaded successfully !
 		</h3>
+        <img src="uploadedContent.htm" alt="uploaded image"/>
 	</center>
 </body>
 </html>
