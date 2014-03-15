@@ -24,51 +24,58 @@ public class UploadController {
 	@Autowired
     FileValidator fileValidator;
 
+
 	@RequestMapping(value = "/fileUploadForm", method = RequestMethod.GET)
 	public ModelAndView getUploadForm(
 			@ModelAttribute("uploadedFile") UploadedFile uploadedFile,
-			BindingResult result) {
-        logger.info("RUNNING /fileUploadForm");
+			BindingResult result)
+    {
+        logger.info("Executed GET /fileUploadForm");
 		return new ModelAndView("uploadForm");
 	}
+
 
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	public ModelAndView fileUploaded(
 			@ModelAttribute("uploadedFile") UploadedFile uploadedFile,
-			BindingResult result) {
-        logger.info("RUNNING /fileUpload");
-		InputStream inputStream = null;
-		OutputStream outputStream = null;
+			BindingResult result)
+    {
+        logger.info("Executed POST /fileUpload");
 
 		MultipartFile file = uploadedFile.getFile();
 		fileValidator.validate(uploadedFile, result);
-
-		String fileName = file.getOriginalFilename();
-
 		if (result.hasErrors()) {
 			return new ModelAndView("uploadForm");
 		}
 
-		try {
-			inputStream = file.getInputStream();
+        String fileName = file.getOriginalFilename();
+        try {
+            InputStream inputStream = null;
+            OutputStream outputStream = null;
+            try {
+                inputStream = file.getInputStream();
 
-			File newFile = new File("C:/Users/nagesh.chauhan/files/" + fileName);
-			if (!newFile.exists()) {
-				newFile.createNewFile();
-			}
-			outputStream = new FileOutputStream(newFile);
-			int read = 0;
-			byte[] bytes = new byte[1024];
-
-			while ((read = inputStream.read(bytes)) != -1) {
-				outputStream.write(bytes, 0, read);
-			}
+                File newFile = new File("/tmp/" + fileName);
+                logger.info("Saving file as: " + newFile.getAbsolutePath());
+                if (!newFile.exists()) {
+                    newFile.createNewFile();
+                }
+                outputStream = new FileOutputStream(newFile);
+                int read = 0;
+                byte[] bytes = new byte[1024];
+                while ((read = inputStream.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+            }
+            finally {
+                if (inputStream != null)
+                    inputStream.close();
+                if (outputStream != null)
+                    outputStream.close();
+            }
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+            logger.warn("Problem saving the file: " + fileName, e);
 		}
-
 		return new ModelAndView("showFile", "message", fileName);
 	}
-
 }
