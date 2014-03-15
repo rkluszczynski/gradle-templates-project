@@ -1,5 +1,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
@@ -7,9 +8,15 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<context:component-scan base-package="com.beingjavaguys.controller" />
+    <mvc:annotation-driven/>
 
-	<bean
+    <context:component-scan
+            base-package="pl.info.rkluszczynski.examples.upload.controller" />
+
+    <bean name="/welcome.htm"
+          class="pl.info.rkluszczynski.examples.upload.controller.HelloWorldController" />
+
+    <bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
 			<value>/WEB-INF/pages/</value>
@@ -19,7 +26,8 @@
 		</property>
 	</bean>
 
-	<bean id="fileValidator" class="com.beingjavaguys.validator.FileValidator" />
+	<bean id="fileValidator"
+          class="pl.info.rkluszczynski.examples.upload.validator.FileValidator" />
 
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
