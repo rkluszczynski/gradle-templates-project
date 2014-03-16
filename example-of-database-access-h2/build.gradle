@@ -1,0 +1,30 @@
+apply plugin: 'h2'
+
+dependencies {
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.2.1'
+}
+
+h2 {
+    tcpPort = 9092
+    webPort = 8082
+
+    example {
+        scripts = [
+        ]
+    }
+}
+
+buildscript {
+    repositories {
+        add(new org.apache.ivy.plugins.resolver.URLResolver()) {
+            name = 'GitHub'
+            addArtifactPattern 'http://cloud.github.com/downloads/[organisation]/[module]/[module]-[revision].[ext]'
+        }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'jamescarr:h2-gradle-plugin:0.8.2'
+            classpath 'com.h2database:h2:1.3.164'
+    }
+}
