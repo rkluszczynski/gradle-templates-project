@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondition;
 import pl.info.rkluszczynski.examples.upload.model.UploadedFile;
 import pl.info.rkluszczynski.examples.upload.validator.FileValidator;
 
@@ -18,7 +17,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.IOException;
 
 @Controller
 public class UploadController {
