@@ -10,6 +10,8 @@ h2 {
 
     example {
         scripts = [
+            'src/test/resources/init-data.sql'
+
         ]
     }
 }
@@ -25,6 +27,6 @@ buildscript {
 
     dependencies {
         classpath 'jamescarr:h2-gradle-plugin:0.8.2'
-            classpath 'com.h2database:h2:1.3.164'
+            classpath 'com.h2database:h2:1.3.175'
     }
 }
