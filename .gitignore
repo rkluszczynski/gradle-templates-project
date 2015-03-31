@@ -1,8 +1,8 @@
 /.gradle/
 /.idea/
 /.nb-gradle/profiles/private/
-/*.iml
+
+*.iml
 
 # Ignores in subprojects
 /*/build/
-/*/*.iml
