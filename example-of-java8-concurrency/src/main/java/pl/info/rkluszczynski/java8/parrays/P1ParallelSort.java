@@ -7,6 +7,8 @@ import java.util.UUID;
 public class P1ParallelSort extends DataClass {
 
     public static void main(String[] args) {
+        System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "3");
+
         P1ParallelSort mySort = new P1ParallelSort();
         int[] src = null;
 
