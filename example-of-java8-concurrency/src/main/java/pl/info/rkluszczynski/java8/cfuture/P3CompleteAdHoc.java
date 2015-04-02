@@ -5,7 +5,6 @@ import java.util.concurrent.ExecutionException;
 
 public class P3CompleteAdHoc {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-        // creates one completable that is not going to end
         CompletableFuture<Integer> completableFutureToBeCompleted2 = CompletableFuture.supplyAsync(() -> {
             for (int i = 0; i < 10; i--) {
                 System.out.println("i " + i);

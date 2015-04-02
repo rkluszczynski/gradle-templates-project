@@ -18,7 +18,6 @@ public class P5Combining {
     }
 
     private static String welcome(Boolean login, Boolean land) {
-        // checks both and returns
         if (login && land)
             return "welcome";
         else

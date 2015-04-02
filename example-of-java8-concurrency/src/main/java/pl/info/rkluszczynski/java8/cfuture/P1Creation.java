@@ -4,10 +4,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class P1Creation {
     public static void main(String[] args) {
-//        CompletableFuture completableFuture = new CompletableFuture();
-
         CompletableFuture completableFuture = CompletableFuture.supplyAsync(() -> {
-            // big computation task
             try {
                 Thread.currentThread().sleep(5000);
             } catch (InterruptedException e) {
