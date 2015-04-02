@@ -2,51 +2,35 @@ package com.danibuiza.javacodegeeks.concurrency.atomic;
 
 import java.util.concurrent.atomic.LongAdder;
 
-public class LongAdderExamples
-{
-
+public class LongAdderExamples {
     private static LongAdder adder;
 
-    public static void main( String[] args )
-    {
+    public static void main(String[] args) {
         adder = new LongAdder();
 
-        for( int i = 0; i < 10; i++ )
-        {
-            new Thread( new Runnable()
-            {
-
+        for (int i = 0; i < 10; i++) {
+            new Thread(new Runnable() {
                 @Override
-                public void run()
-                {
+                public void run() {
                     incrementOrDecrement();
                     show();
-
                 }
-
-            }, "" + i ).start();
+            }, "" + i).start();
         }
     }
 
-    private static void show()
-    {
-        System.out.println( Thread.currentThread().getName() + " value of adder " + adder.intValue() );
-
+    private static void show() {
+        System.out.println(Thread.currentThread().getName() + " value of adder " + adder.intValue());
     }
 
-    private static void incrementOrDecrement()
-    {
+    private static void incrementOrDecrement() {
         int value = adder.intValue();
-        if( value == 5 )
-        {
-            System.out.println( Thread.currentThread().getName() + " decrementing value... " );
+        if (value == 5) {
+            System.out.println(Thread.currentThread().getName() + " decrementing value... ");
             adder.decrement();
-        }
-        else
-        {
-            System.out.println( Thread.currentThread().getName() + " incrementing value... " );
+        } else {
+            System.out.println(Thread.currentThread().getName() + " incrementing value... ");
             adder.increment();
         }
-
     }
 }
