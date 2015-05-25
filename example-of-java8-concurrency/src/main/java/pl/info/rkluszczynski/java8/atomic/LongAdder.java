@@ -1,20 +1,15 @@
-package com.danibuiza.javacodegeeks.concurrency.atomic;
+package pl.info.rkluszczynski.java8.atomic;
 
-import java.util.concurrent.atomic.LongAdder;
-
-public class LongAdderExamples {
-    private static LongAdder adder;
+public class LongAdder {
+    private static java.util.concurrent.atomic.LongAdder adder;
 
     public static void main(String[] args) {
-        adder = new LongAdder();
+        adder = new java.util.concurrent.atomic.LongAdder();
 
         for (int i = 0; i < 10; i++) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    incrementOrDecrement();
-                    show();
-                }
+            new Thread(() -> {
+                incrementOrDecrement();
+                show();
             }, "" + i).start();
         }
     }
