@@ -11,5 +11,4 @@ public class MockitoExample {
     public String helloMockito() {
 	return HELLO_MOCKITO_STRING;
     }
-    
 }

@@ -15,10 +15,10 @@ if (!hasProperty('mainClass')) {
 
 dependencies {
     // Mockito testing framework (http://code.google.com/p/mockito/):
-    testCompile group: 'org.mockito', name: 'mockito-core', version: '1.9.5'
+    testCompile 'org.mockito:mockito-core:1.9.5'
     // Spock testing framework (http://code.google.com/p/spock/):
-    testCompile group: 'org.spockframework', name: 'spock-core', version: '0.7-groovy-2.0'
-    
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+
     // TODO: Add dependencies here
     //   but note that JUnit should have already been added in parent.gradle.
     //   By default, only the Maven Central Repository is specified in
@@ -26,4 +26,33 @@ dependencies {
     //
     // You can read more about how to add dependency here:
     //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
+}
+
+
+sourceSets {
+    integrationTest {
+        groovy.srcDir 'src/integration/groovy'
+//        java.srcDir 'src/integration/java'
+        resources.srcDir 'src/integration/resources'
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom integrationTestCompile
+}
+
+// Run task with variable:
+// $ gradlew cleanTest :example-of-testing-project:iT -PgradleVariable=pl,ru
+def gradleVariableValue = hasProperty('gradleVariable') ? gradleVariable : '-'
+
+task integrationTest(type: Test) {
+    description = "Runs Integration Tests"
+    tasks.integrationTest.setGroup('Verification')
+
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath += sourceSets.integrationTest.runtimeClasspath
+
+    testLogging.showStandardStreams = true
+    environment 'gradleVariable', gradleVariableValue
 }
